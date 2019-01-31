@@ -1,0 +1,86 @@
+{:duct.profile/base
+ {:duct.core/project-ns hyd
+
+  :duct.middleware.web/defaults {:security {:anti-forgery false}}
+  :duct.handler/root {:middleware [#ig/ref :duct.middleware.web/format]}
+  :duct.middleware.web/format {}
+
+  :magnet.buddy-auth/jwt-oidc
+  {:claims
+   {:iss #duct/env ["OIDC_ISSUER_URL" Str]
+    :aud #duct/env ["OIDC_AUDIENCE" Str]}
+   :jwks-uri #duct/env ["OIDC_JWKS_URI" Str]}
+
+  :duct.middleware.buddy/authentication
+  {:backend :token
+   :token-name "Bearer"
+   :authfn #ig/ref :magnet.buddy-auth/jwt-oidc}
+
+  :duct.router/cascading
+  [#ig/ref :hyd.handler/root
+   #ig/ref :hyd.handler/api
+   #ig/ref :hyd.handler/config]
+
+  :hyd.handler/root {}
+  :hyd.handler/api
+  {:secrets-storage #ig/ref :magnet.secrets-storage/aws-ssm-ps
+   :auth-middleware #ig/ref :duct.middleware.buddy/authentication}
+
+  :hyd.handler/config
+  {:iss #duct/env ["OIDC_ISSUER_URL" Str]
+   :client-id #duct/env ["OIDC_AUDIENCE" Str]}
+
+  [:duct/const :magnet.aws/credentials]
+  {:access-key-id #duct/env ["AWS_ACCESS_KEY_ID" Str]
+   :secret-access-key #duct/env ["AWS_SECRET_ACCESS_KEY" Str]
+   :default-region #duct/env ["AWS_DEFAULT_REGION" Str :or "eu-west-1"]}
+
+  :magnet.object-storage/s3
+  {:presigned-url-lifespan 2.5
+   :bucket-name #duct/env ["OBJECT_STORAGE_S3_BUCKET" Str]}
+
+  [:duct/const :const/postgres-cfg]
+  {:host #duct/env ["POSTGRES_HOST" Str]
+   :port #duct/env ["POSTGRES_PORT" Str]
+   :db #duct/env ["POSTGRES_DB" Str]
+   :user #duct/env ["POSTGRES_USER" Str]
+   :password #duct/env ["POSTGRES_PASSWORD" Str]}
+
+  :magnet.scheduling/twarc
+  {:postgres-cfg #ig/ref [:duct/const :const/postgres-cfg]
+   :scheduler-name "main-scheduler"
+   :logger #ig/ref :duct/logger}
+
+  :magnet.secrets-storage/aws-ssm-ps
+  {:aws-kms-key #duct/env ["SSM_SP_AWS_KMS_KEY" Str]
+   :user-keys-path #duct/env ["SSM_SP_USER_KEYS_PATH" Str]}
+
+  :duct.compiler/cljs
+  {:builds
+   [{:source-paths ["src/"]
+     :build-options
+     {:main hyd.client.main
+      :output-to "target/resources/hyd/public/js/main.js"
+      :output-dir "target/resources/hyd/public/js"
+      :asset-path "/js"
+      :closure-defines {:goog.DEBUG false}
+      :aot-cache true
+      :verbose true
+      :externs ["src/hyd/client/externs.js"]
+      :optimizations :advanced}}]}
+
+  :duct.compiler/sass
+  {:source-paths ["resources"]
+   :output-path "target/resources"}}
+
+ :duct.profile/dev #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod {}
+
+ :duct.module/logging {}
+ :duct.module.web/site {}
+ :duct.module/cljs {:main hyd.client.main}
+
+ :duct.module/sql {:database-url #duct/env ["JDBC_DATABASE_URL" Str]}
+ :magnet.module.scheduling/twarc-pgsql {}
+}

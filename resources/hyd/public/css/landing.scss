@@ -1,0 +1,34 @@
+.landing-container header {
+  text-align: center;
+}
+
+.landing-container header h1 {
+  color: var(--hydrogen-black);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: .5rem;
+}
+
+.login-form input, login-form label {
+  display: block;
+  margin-bottom: 1rem;
+
+}
+
+.btn {
+  background-color: var(--hydrogen-black);
+  color: var(--hydrogen-white);
+  padding: 10px 25px;
+  text-decoration: none;
+  transition: background-color .2s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--hydrogen-darker);
+}

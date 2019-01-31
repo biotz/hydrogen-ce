@@ -1,0 +1,69 @@
+/* A normalized styling */
+html, body, #app, .app-container{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-family: 'Poppins', sans-serif;
+  --hydrogen-black: #262c2d;
+  --hydrogen-darker: #161a1b;
+  --hydrogen-brown: #997d56;
+  --hydrogen-darker-brown: #6e593e;
+  --hydrogen-white: #ffffff;
+  --hydrogen-darker-white: #ccc;
+}
+
+/* TODO I dindn't put a lot of effort into the quality of this stylesheet.
+That's because we'll soon decide on the standards of writing them.
+The stylesheet presented new is there just as an example of usage.
+~@DH 2018.10.25 */
+
+/********************
+* TO-DO
+*********************/
+
+.todo-main {
+    max-width: 800px;
+}
+
+#home {
+  min-height: calc(100vh);
+  background: var(--hydrogen-black);
+  text-align: center;
+  color: var(--hydrogen-white);
+}
+
+#home h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+#home-links {
+  display: flex;
+  justify-content: center;
+}
+
+#home-links a {
+  margin: 20px;
+  font-weight: bold;
+  color: var(--hydrogen-brown);
+}
+
+.logout {
+  margin: 0 auto;
+  width: 100px;
+  padding: 10px 25px;
+  color: var(--hydrogen-white);
+  background-color: var(--hydrogen-brown);
+  transition: background-color .3s, color .3s;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: var(--hydrogen-darker-brown);
+  color: var(--hydrogen-darker-white);
+}

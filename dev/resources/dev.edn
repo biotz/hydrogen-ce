@@ -1,0 +1,16 @@
+{:duct.server/figwheel
+ {:css-dirs ["target/resources/hyd/public/css"]
+  :builds   [{:id "dev"
+              :figwheel {:on-jsload "hyd.client.main/mount-root"}
+              :source-paths  ["dev/src" "src"]
+              :build-options {:main hyd.client.main
+                              :output-to "target/resources/hyd/public/js/main.js"
+                              :output-dir "target/resources/hyd/public/js"
+                              :asset-path "/js"
+                              :closure-defines {goog.DEBUG true
+                                                "re_frame.trace.trace_enabled_QMARK_" true}
+                              :verbose false
+                              :preloads [devtools.preload
+                                         day8.re-frame-10x.preload]
+                              :optimizations :none}}]}
+ :duct.compiler/cljs ^:replace {}}
