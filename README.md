@@ -4,14 +4,14 @@
 Hydrogen is a full-stack platform based on the [Duct framework](https://github.com/duct-framework/duct). This repository contains a
 demo of a SPA using Hydrogen Community Edition that implements the following features:
 
-* **Frontend** Reagent is used for the user interface, and re-frame to manage the application state. 
+* **Frontend:** Reagent is used for the user interface, and re-frame to manage the application state.
 [re-frame-10x](https://github.com/Day8/re-frame-10x) plugin is also installed, and can be used to inspect the application state and the event flow in real time.
 To see the usability of the plugin, a playground (an interactive TODO list) is included.
 * **Routing:** [Secretary](https://github.com/clj-commons/secretary) is used for the client side routing. The demo also implements routing logic based on the user authentication.
-* **Token based authentication:** 
-	* **Token retrieval** AWS Cognito is the chosen OpenId provider for this demo.
-	* **Token validation** the retrieved user tokens are validated using the module [buddy-auth.jwt-oidc](https://github.com/magnetcoop/buddy-auth.jwt-oidc) 
-* **Encryption:** The demo has a simple example of text encryption and decryption using the [encryption](https://github.com/magnetcoop/encryption) module. 
+* **Token based authentication:**
+	* **Token retrieval:** AWS Cognito is the chosen OpenId provider for this demo.
+	* **Token validation:** the user tokens are validated using the module [buddy-auth.jwt-oidc](https://github.com/magnetcoop/buddy-auth.jwt-oidc).
+* **Encryption:** The demo has a simple example of text encryption and decryption using the [encryption](https://github.com/magnetcoop/encryption) module.
 * **Secret storage:** User's privates keys used for the encryption example are stored in AWS SSM Parameter Store using the [secrets-storage.aws-ssm-ps](https://github.com/magnetcoop/secret-storage.aws-ssm-ps) module.
 
 # Modules #
@@ -24,7 +24,7 @@ Apart from Duct core modules, Hydrogen is composed of multiple libraries/modules
 The following modules don't have any specific functionality related with the demo, but their configuration is present as an example:
 
 * [**Scheduling Twarc**](https://github.com/magnetcoop/scheduling.twarc): Duct library for using Twarc with PersistentJobs.
-* [**Object storage**](https://github.com/magnetcoop/object-storage.s3): Duct library for managing AWS S3 objects. 
+* [**Object storage**](https://github.com/magnetcoop/object-storage.s3): Duct library for managing AWS S3 objects.
 
 
 For more information about the usage of every module please refer to the links above.
@@ -43,11 +43,11 @@ To run this application locally please make sure you meet the following setup:
 * Authentication: `OIDC_ISSUER_URL`, `OIDC_AUDIENCE`, `OIDC_JWKS_URI`
 * Secrets storage: `SSM_SP_AWS_KMS_KEY`, `SSM_SP_USERS_KEY_PATH`
 * Object storage: `OBJECTS_STORAGE_S3_BUCKET`
-* AWS: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESs_KEY`, `AWS_DEFAULT_REGION`
+* AWS: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`
 
 ### Running the application
 #### Development
-To begin developing, start the REPL.
+Start the REPL.
 
 ```sh
 lein repl
