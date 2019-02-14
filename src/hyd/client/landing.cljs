@@ -26,7 +26,8 @@
 
 (defn- do-login-if-enter-pressed [event credentials]
   (when (= (.-key event) "Enter")
-    (re-frame/dispatch [::session/user-login credentials])))
+    (re-frame/dispatch [::session/user-login credentials])
+    (.preventDefault event)))
 
 (defn login-form []
   (let [token (re-frame/subscribe [::session/token])
