@@ -59,7 +59,7 @@
                           (re-frame/dispatch [::set-token id-token])
                           (re-frame/dispatch [::view/go-to-home])))
            :onFailure (fn [err]
-                        (re-frame/dispatch [::set-auth-error (:message (js->clj err :keywordize-keys true))]))}))))
+                        (re-frame/dispatch [::set-auth-error "Incorrect username or password"]))}))))
 
 (re-frame/reg-event-fx
  ::user-logout
