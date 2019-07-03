@@ -14,7 +14,7 @@
                  [org.clojure/tools.logging "0.4.1"]
 
                  ;; Hydrogen Modules
-                 [magnet/buddy-auth.jwt-oidc "0.4.0"]
+                 [magnet/buddy-auth.jwt-oidc "0.6.0"]
                  [magnet/encryption "0.2.0"]
                  [magnet/object-storage.s3 "0.3.0"]
                  [magnet/secret-storage.aws-ssm-ps "0.3.0"]

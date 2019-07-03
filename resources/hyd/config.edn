@@ -9,7 +9,8 @@
   {:claims
    {:iss #duct/env ["OIDC_ISSUER_URL" Str]
     :aud #duct/env ["OIDC_AUDIENCE" Str]}
-   :jwks-uri #duct/env ["OIDC_JWKS_URI" Str]}
+   :jwks-uri #duct/env ["OIDC_JWKS_URI" Str]
+   :logger #ig/ref :duct/logger}
 
   :duct.middleware.buddy/authentication
   {:backend :token
