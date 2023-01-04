@@ -1,3 +1,5 @@
+## NOTE: This project got deprecated. Please refer to [gethop.dev](https://gethop.dev) which supercedes Hydrogen Community Edition.
+
 # Hydrogen Community Edition #
 
 # About #
